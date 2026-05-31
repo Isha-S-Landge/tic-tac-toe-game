@@ -35,6 +35,7 @@ An interactive Tic Tac Toe game built using HTML, CSS, and JavaScript.
 * Mobile Optimization
 
 ## Live Demo
+https://isha-s-landge.github.io/tic-tac-toe-game/
 
 
 ## GitHub Repository
