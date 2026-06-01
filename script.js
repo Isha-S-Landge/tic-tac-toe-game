@@ -2,6 +2,7 @@ const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restartBtn");
 const themeSwitch = document.getElementById("themeSwitch");
+const muteBtn = document.getElementById("muteBtn");
 const resetScoreBtn = document.getElementById("resetScoreBtn");
 const resultMessage = document.getElementById("resultMessage");
 const xScoreDisplay = document.getElementById("xScore");
@@ -19,6 +20,7 @@ let oScore = Number(localStorage.getItem("oScore")) || 0;
 let drawScore = Number(localStorage.getItem("drawScore")) || 0;
 let gameMode = localStorage.getItem("gameMode") || "twoPlayer";
 let difficulty = localStorage.getItem("difficulty") || "medium";
+let soundMuted = localStorage.getItem("soundMuted") === "true";
 
 let currentPlayer = "X";
 let gameActive = true;
@@ -37,8 +39,19 @@ const winningCombinations = [
 ];
 
 function safePlay(sound) {
+    if (soundMuted) {
+        return;
+    }
+
     sound.currentTime = 0;
     sound.play().catch(() => {});
+}
+
+function updateMuteButton() {
+    muteBtn.innerHTML = soundMuted ? "&#128263;" : "&#128266;";
+    muteBtn.setAttribute("aria-label", soundMuted ? "Unmute sound" : "Mute sound");
+    muteBtn.setAttribute("title", soundMuted ? "Unmute sound" : "Mute sound");
+    muteBtn.classList.toggle("muted", soundMuted);
 }
 
 function updateScoreBoard() {
@@ -93,6 +106,8 @@ function getRoundResult(currentBoard = board) {
 }
 
 function updateStatus() {
+    statusText.classList.remove("result-status");
+
     if (gameMode === "ai" && currentPlayer === "O") {
         statusText.textContent = "AI is thinking...";
         return;
@@ -120,17 +135,18 @@ function finishRound(result) {
     aiThinking = false;
 
     if (result.winner === "draw") {
-        resultMessage.textContent = "Game Draw!";
+        resultMessage.textContent = "";
         statusText.textContent = "Game Draw!";
+        statusText.classList.add("result-status");
         drawScore++;
         updateScoreBoard();
         safePlay(drawSound);
-        resultMessage.classList.add("show-result");
         return true;
     }
 
-    resultMessage.textContent = `${result.winner} Wins!`;
+    resultMessage.textContent = "";
     statusText.textContent = `${result.winner} Wins!`;
+    statusText.classList.add("result-status");
 
     if (result.winner === "X") {
         xScore++;
@@ -140,8 +156,6 @@ function finishRound(result) {
 
     updateScoreBoard();
     safePlay(winSound);
-    resultMessage.classList.add("show-result");
-
     result.combination.forEach(index => {
         cells[index].classList.add("winner");
     });
@@ -326,6 +340,7 @@ function restartGame() {
 
     resultMessage.textContent = "";
     resultMessage.classList.remove("show-result");
+    statusText.classList.remove("result-status");
 
     cells.forEach(cell => {
         cell.textContent = "";
@@ -349,10 +364,17 @@ cells.forEach(cell => {
 restartBtn.addEventListener("click", restartGame);
 resetScoreBtn.addEventListener("click", resetScores);
 
+muteBtn.addEventListener("click", () => {
+    soundMuted = !soundMuted;
+    localStorage.setItem("soundMuted", soundMuted);
+    updateMuteButton();
+});
+
 gameModeSelect.value = gameMode;
 difficultySelect.value = difficulty;
 updateOptions();
 updateScoreBoard();
+updateMuteButton();
 updateStatus();
 
 gameModeSelect.addEventListener("change", () => {

@@ -15,19 +15,27 @@
 
         <h1>Tic Tac Toe</h1>
 
-        <div class="theme-toggle">
+        <div class="top-controls">
 
-            <span>&#127769;</span>
+            <div class="theme-toggle">
 
-            <label class="switch">
+                <span>&#127769;</span>
 
-                <input type="checkbox" id="themeSwitch">
+                <label class="switch" aria-label="Toggle light theme">
 
-                <span class="slider"></span>
+                    <input type="checkbox" id="themeSwitch">
 
-            </label>
+                    <span class="slider"></span>
 
-            <span>&#9728;</span>
+                </label>
+
+                <span>&#9728;</span>
+
+            </div>
+
+            <button class="icon-button" id="muteBtn" type="button" aria-label="Mute sound" title="Mute sound">
+                &#128266;
+            </button>
 
         </div>
 

@@ -27,6 +27,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
@@ -38,12 +39,20 @@ h1 {
     font-size: clamp(1.9rem, 5vh, 2.6rem);
 }
 
+.top-controls,
 .theme-toggle {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+}
+
+.top-controls {
+    gap: 14px;
     margin-bottom: 10px;
+}
+
+.theme-toggle {
+    gap: 12px;
 }
 
 .switch {
@@ -83,6 +92,29 @@ input:checked + .slider {
 
 input:checked + .slider::before {
     transform: translateX(36px);
+}
+
+.icon-button {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: none;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.icon-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.icon-button.muted {
+    background: rgba(255, 75, 92, 0.85);
 }
 
 .game-options {
@@ -158,10 +190,14 @@ input:checked + .slider::before {
 }
 
 .status {
+    min-height: 40px;
     color: #ffd369;
     font-size: clamp(1.25rem, 3.6vh, 1.7rem);
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .board-container {
@@ -201,16 +237,30 @@ input:checked + .slider::before {
 }
 
 .winner {
+    animation: winnerPulse 0.9s ease-in-out infinite alternate;
     background: #00ff95 !important;
-    color: black !important;
-    box-shadow: 0 0 15px #00ff95, 0 0 30px #00ff95;
+    color: #081510 !important;
+    border-color: rgba(255, 255, 255, 0.72) !important;
+    box-shadow: 0 0 16px #00ff95, 0 0 34px rgba(0, 255, 149, 0.86);
+}
+
+@keyframes winnerPulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 14px #00ff95, 0 0 28px rgba(0, 255, 149, 0.78);
+    }
+
+    to {
+        transform: scale(1.08);
+        box-shadow: 0 0 24px #00ff95, 0 0 46px rgba(0, 255, 149, 0.96);
+    }
 }
 
 .button-group {
     display: flex;
     gap: 12px;
     justify-content: center;
-    margin-top: 12px;
+    margin-top: 8px;
     flex-wrap: wrap;
 }
 
@@ -234,20 +284,12 @@ button:hover {
 }
 
 .result-message {
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffd700;
-    font-size: clamp(1.2rem, 3.6vh, 1.7rem);
-    font-weight: bold;
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
-    opacity: 0;
-    transition: 0.3s;
+    display: none;
 }
 
-.show-result {
-    opacity: 1;
+.result-status {
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
 }
 
 body.light-theme .container {
@@ -265,14 +307,24 @@ body.light-theme .score-card {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
-body.light-theme .game-options select {
+body.light-theme .game-options select,
+body.light-theme .icon-button {
     background: white;
     color: #222;
     border-color: #d9d9d9;
 }
 
+body.light-theme .icon-button.muted {
+    background: #ff4b5c;
+    color: white;
+}
+
 body.light-theme .status {
     color: #ff6b00;
+}
+
+body.light-theme .status.result-status {
+    color: #ffd700;
 }
 
 body.light-theme .cell {
@@ -296,7 +348,8 @@ body.light-theme .cell {
         font-size: 1.65rem;
     }
 
-    .theme-toggle {
+    .top-controls {
+        gap: 10px;
         margin-bottom: 8px;
     }
 
@@ -345,7 +398,7 @@ body.light-theme .cell {
     }
 
     .button-group {
-        margin-top: 10px;
+        margin-top: 8px;
     }
 
     button {

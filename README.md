@@ -1,42 +1,52 @@
-# Tic Tac Toe Game 🎮
+# Tic Tac Toe Game
 
-An interactive Tic Tac Toe game built using HTML, CSS, and JavaScript.
+An interactive Tic Tac Toe game built with HTML, CSS, and JavaScript.
+
+![Tic Tac Toe screenshot](assets/screenshot.png)
+
+## Live Demo
+
+https://isha-s-landge.github.io/tic-tac-toe-game/
 
 ## Features
 
-* Interactive game board
-* Winner detection
-* Draw detection
-* Restart game functionality
-* Sound effects
-* Winner highlight animation
-* Responsive UI
+- Two-player mode
+- Play vs AI mode
+- Easy, Medium, and Hard difficulty levels
+- Hard mode uses the Minimax algorithm
+- Winner and draw detection
+- Persistent score tracking with localStorage
+- Dark and light theme toggle
+- Mute/unmute sound control
+- Restart game and reset scores actions
+- Winner highlight animation
+- Responsive one-screen layout
 
 ## Technologies Used
 
-* HTML
-* CSS
-* JavaScript
+- HTML
+- CSS
+- JavaScript
+- localStorage
 
-## Concepts Learned
+## What I Learned
 
-* DOM Manipulation
-* Event Handling
-* Game State Management
-* CSS Animations
-* Audio Integration in JavaScript
+- DOM manipulation
+- Event handling
+- Game state management
+- Score persistence with localStorage
+- Audio controls in JavaScript
+- AI decision-making with Minimax
+- Responsive UI design
 
-## Future Improvements
+## Version Progress
 
-* AI Opponent
-* Score Tracking
-* Dark/Light Mode
-* Local Storage Support
-* Mobile Optimization
-
-## Live Demo
-https://isha-s-landge.github.io/tic-tac-toe-game/
-
+- Version 1: Basic Tic Tac Toe game
+- Version 2: Improved layout and score persistence
+- Version 3: AI opponent mode
+- Version 4: Easy, Medium, and Hard difficulty levels
+- Version 5: Mute control, win animation polish, README, screenshot, and testing pass
 
 ## GitHub Repository
+
 https://github.com/Isha-S-Landge/tic-tac-toe-game
