@@ -4,6 +4,8 @@ const statusText = document.getElementById("status");
 
 const restartBtn = document.getElementById("restartBtn");
 
+const themeSwitch =document.getElementById("themeSwitch");
+
 const resetScoreBtn =
     document.getElementById("resetScoreBtn");
 
@@ -157,6 +159,8 @@ function checkWinner() {
             );
 
             gameActive = false;
+            
+            statusText.textContent =`${currentPlayer} Wins!`;
 
             if (currentPlayer === "X") {
 
@@ -217,7 +221,7 @@ function checkWinner() {
             : "X";
 
     statusText.textContent =
-        `Player ${currentPlayer}'s Turn`;
+    `Player ${currentPlayer}'s Turn`;
 }
 
 function restartGame() {
@@ -278,4 +282,44 @@ restartBtn.addEventListener(
 resetScoreBtn.addEventListener(
     "click",
     resetScores
+);
+const savedTheme =
+    localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+
+    document.body.classList.add(
+        "light-theme"
+    );
+
+    themeSwitch.checked = true;
+}
+
+themeSwitch.addEventListener(
+    "change",
+    () => {
+
+        document.body.classList.toggle(
+            "light-theme"
+        );
+
+        if (
+            document.body.classList.contains(
+                "light-theme"
+            )
+        ) {
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+
+        } else {
+
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+        }
+    }
 );
