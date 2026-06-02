@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -228,7 +228,14 @@ input:checked + .slider::before {
     font-weight: bold;
     color: white;
     cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    caret-color: transparent;
     transition: 0.3s;
+}
+
+.cell:focus {
+    outline: none;
 }
 
 .cell:hover {
@@ -406,5 +413,9 @@ body.light-theme .cell {
         flex: 1;
         padding: 9px;
         font-size: 0.9rem;
+        caret-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+
     }
 }
